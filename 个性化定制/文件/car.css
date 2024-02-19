@@ -1,0 +1,14 @@
+.img_one,.img_two{
+    width: 200px;
+    height: 200px;
+}
+
+button {
+    width: 400px;
+    height: 45px;
+}
+
+#imageContainer {
+    width: 200px;
+    height: 45px;
+}

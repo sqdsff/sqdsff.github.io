@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>input多选类型绑定点击事件</title>
+</head>
+<body>
+    <label for="colorCheckbox">请选择您喜欢的颜色：</label><br>
+    <input type="checkbox" id="redCheckbox" value="red"> 红色<br>
+    <input type="checkbox" id="blueCheckbox" value="blue"> 蓝色<br>
+    <input type="checkbox" id="greenCheckbox" value="green"> 绿色<br>
+
+    <p id="output"></p>
+
+    <script>
+        const redCheckbox = document.getElementById('redCheckbox');
+        const blueCheckbox = document.getElementById('blueCheckbox');
+        const greenCheckbox = document.getElementById('greenCheckbox');
+        const output = document.getElementById('output');
+
+        redCheckbox.addEventListener('click', updateSelection);
+        blueCheckbox.addEventListener('click', updateSelection);
+        greenCheckbox.addEventListener('click', updateSelection);
+
+        function updateSelection() {
+            let selectedColors = [];
+            if (redCheckbox.checked) {
+                selectedColors.push(redCheckbox.value);
+            }
+            if (blueCheckbox.checked) {
+                selectedColors.push(blueCheckbox.value);
+            }
+            if (greenCheckbox.checked) {
+                selectedColors.push(greenCheckbox.value);
+            }
+            console.log(selectedColors.join);
+            output.textContent = '您选择的颜色是：' + selectedColors.join(', ');
+        }
+    </script>
+</body>
+</html>

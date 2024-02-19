@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="文件/car.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <form>
+        <p>请想象您正处于购买状态,选择车型。奥迪A3的两种车型如下图所示,
+            请选择喜欢的车型。  
+        </p>
+        <!--<img src="图片/A31.jpg" class="img_zero"/><br/>-->
+        车型：<br/>
+        <img src="图片/0000.jpg" class="img_one"/>
+        <input type="radio" name="a" id="one">豪华运动型<br/>
+        <img src="图片/0001.jpg" class="img_two"/>
+        <input type="radio" name="a" id="two">时尚运动型
+            <br>
+        <p>选择车漆颜色,奥迪A3的3种车漆颜色如下图所示,
+                选择喜欢的车漆颜色。
+        </p>
+        车漆颜色：<br/>
+        <img src="图片/2Y2Y.jpg" class="img_three"/>
+        <input type="radio" name="b" id="three">冰川白<br/>
+        <img src="图片/5V5V.jpg" class="img_four" />
+        <input type="radio" name="b" id="four">锰石黑<br/>
+        <img src="图片/Y1Y1.jpg" class="img_five" />
+        <input type="radio" name="b" id="five">探戈红<br/>
+            <br>
+        <p>选择轮毂,奥迪A3的2种轮毂如下图所示,
+                选择喜欢的轮毂。
+        </p>
+        轮毂：<br/>
+        <img src="图片/U16.jpg" class="img_six"/>
+        <input type="radio" name="c" id="six">18英寸5辐双V型铝合金轮辋<br/>
+        <img src="图片/CD3.jpg" class="img_seven"/>
+        <input type="radio" name="c" id="seven">18英寸5辐双V双色铝合金轮辋<br/>
+    </form>
+    <br><br><br>
+    <button id="button">提交</button><br><br><br>
+    <p>您所选择的结果效果如下图所示</p>
+    <div id="imageContainer"></div>
+
+    <script>
+        var selectone = 0;
+        var selectotwo = 0;
+        var selectthree = 0;
+        var startTime;
+        var imageContainer = document.getElementById("imageContainer");
+        console.log("js");
+        window.onload = function() {
+            startTime = new Date().getTime();
+        };
+        //const one = document.getElementsByClassName('one');
+        document.getElementById("one").addEventListener("click", changeone);
+        function changeone() {
+            selectone = 1;
+        }
+
+        document.getElementById("two").addEventListener("click", changetwo);
+        function changetwo() {
+            selectone = 2;
+        }
+
+        document.getElementById("three").addEventListener("click", changethree);
+        function changethree() {
+            selectotwo = 3;
+        }
+
+        document.getElementById("four").addEventListener("click", changefour);
+        function changefour() {
+            selectotwo = 4;
+        }
+
+        document.getElementById("five").addEventListener("click", changefive);
+        function changefive() {
+            selectotwo = 5;
+        }
+
+        document.getElementById("six").addEventListener("click", changesix);
+        function changesix() {
+            selectthree = 6;
+        }
+
+        document.getElementById("seven").addEventListener("click", changeseven);
+        function changeseven() {
+            selectthree = 7;
+        }
+        
+        document.getElementById("button").addEventListener("click",function() {
+            var currentTime = new Date().getTime();
+            var elapsedTime = currentTime - startTime;
+
+            if (elapsedTime < 5000) {
+                alert("您在3秒内按下了按钮！");
+            } else {
+                result();
+            }
+        });
+
+        function result() {
+            //imageContainer.innerHTML = '<img src="图片/效果/1单白.png" alt="图片1">';
+            if (selectone == 1 && selectotwo == 3 && selectthree == 6) {
+                imageContainer.innerHTML = '<img src="图片/效果/1单白.png" style="width: 400px; height: 200px;" >';
+            } else if (selectone === 1 && selectotwo === 4 && selectthree === 6) {
+                imageContainer.innerHTML = '<img src="图片/效果/1单黑.png" style="width: 400px; height: 200px;">';
+            } else if (selectone === 1 && selectotwo === 5 && selectthree === 6) {
+                imageContainer.innerHTML = '<img src="图片/效果/1单红.png" style="width: 400px; height: 200px;">';
+            } else if (selectone === 1 && selectotwo === 3 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/1双白.png" style="width: 400px; height: 200px;">';
+            } else if (selectone === 1 && selectotwo === 4 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/1双黑.png" style="width: 400px; height: 200px;">';
+            } else if (selectone === 1 && selectotwo === 5 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/1双红.png" style="width: 400px; height: 200px;">';
+            } else if (selectone === 2 && selectotwo === 3 && selectthree === 6) {
+                imageContainer.innerHTML = '<img src="图片/效果/2单白.png" style="width: 400px; height: 200px;">';
+            } else if (selectone === 2 && selectotwo === 4 && selectthree === 6) {
+                imageContainer.innerHTML = '<img src="图片/效果/2单黑.png" style="width: 400px; height: 200px;">';
+            } else if (selectone === 2 && selectotwo === 5 && selectthree === 6) {
+                imageContainer.innerHTML = '<img src="图片/效果/2单红.png" style="width: 400px; height: 200px;">';
+            } else if (selectone === 2 && selectotwo === 3 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/2双白.png" style="width: 400px; height: 200px;">';
+            } else if (selectone === 2 && selectotwo === 4 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/2双黑.png" style="width: 400px; height: 200px;">';
+            } else if (selectone === 2 && selectotwo === 5 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/2双红.png" style="width: 400px; height: 200px;">';
+            }
+        }
+        /*
+        addEventListener('click', updateSelection);
+        function updateSelection() {
+            selectone++;
+            console.log(selectone);
+            console.log("成功");
+        }
+        
+        function showImage() {
+            console.log("js");
+            var selectElement1 = document.getElementsByName("one");
+            var selectElement1 = document.getElementsByName("two");
+            var selectElement1 = document.getElementsByName("three");
+            var selectElement1 = document.getElementsByName("four");
+            var selectElement1 = document.getElementsByName("five");
+            var selectElement1 = document.getElementsByName("six");
+            var selectElement1 = document.getElementsByName("seven");
+            var imageContainer = document.getElementById("imageContainer");
+            var sum;
+            document.getElementsByClassName("one").onclick = function () {
+                console.log("码仙");
+            };
+            
+            if (selectedOption1 === "option1" && selectedOption2 === "optionA") {
+                imageContainer.innerHTML = '<img src="image1.jpg" alt="图片1">';
+            } else if (selectedOption1 === "option1" && selectedOption2 === "optionB") {
+                imageContainer.innerHTML = '<img src="image2.jpg" alt="图片2">';
+            } else if (selectedOption1 === "option1" && selectedOption2 === "optionC") {
+                imageContainer.innerHTML = '<img src="image3.jpg" alt="图片3">';
+            } else if (selectedOption1 === "option2" && selectedOption2 === "optionA") {
+                imageContainer.innerHTML = '<img src="image4.jpg" alt="图片4">';
+            } else if (selectedOption1 === "option2" && selectedOption2 === "optionB") {
+                imageContainer.innerHTML = '<img src="image5.jpg" alt="图片5">';
+            } else if (selectedOption1 === "option2" && selectedOption2 === "optionC") {
+                imageContainer.innerHTML = '<img src="image6.jpg" alt="图片6">';
+            }
+        }*/
+    </script>
+</body>
+</html>
