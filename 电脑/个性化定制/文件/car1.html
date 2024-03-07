@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<title>展示不同图片</title>
+</head>
+<body>
+    <h1>选择不同选项展示不同图片</h1>
+    <form>
+        <label for="options1">选择第一个选项：</label>
+        <select id="options1" onchange="showImage()">
+            <option value="option1">选项1</option>
+            <option value="option2">选项2</option>
+        </select>
+    </form>
+
+    <form>
+        <label for="options2">选择第二个选项：</label>
+        <select id="options2" onchange="showImage()">
+            <option value="optionA">选项A</option>
+            <option value="optionB">选项B</option>
+            <option value="optionC">选项C</option>
+        </select>
+    </form>
+
+    <div id="imageContainer"></div>
+
+    <script>
+        function showImage() {
+            var selectElement1 = document.getElementById("options1");
+            var selectElement2 = document.getElementById("options2");
+            var selectedOption1 = selectElement1.value;
+            var selectedOption2 = selectElement2.value;
+            var imageContainer = document.getElementById("imageContainer");
+
+            if (selectedOption1 === "option1" && selectedOption2 === "optionA") {
+                imageContainer.innerHTML = '<img src="image1.jpg" alt="图片1">';
+            } else if (selectedOption1 === "option1" && selectedOption2 === "optionB") {
+                imageContainer.innerHTML = '<img src="image2.jpg" alt="图片2">';
+            } else if (selectedOption1 === "option1" && selectedOption2 === "optionC") {
+                imageContainer.innerHTML = '<img src="image3.jpg" alt="图片3">';
+            } else if (selectedOption1 === "option2" && selectedOption2 === "optionA") {
+                imageContainer.innerHTML = '<img src="image4.jpg" alt="图片4">';
+            } else if (selectedOption1 === "option2" && selectedOption2 === "optionB") {
+                imageContainer.innerHTML = '<img src="image5.jpg" alt="图片5">';
+            } else if (selectedOption1 === "option2" && selectedOption2 === "optionC") {
+                imageContainer.innerHTML = '<img src="image6.jpg" alt="图片6">';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>下拉菜单显示对应的图片</title>
+<style>
+    select {
+        padding: 5px;
+    }
+
+    img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+</style>
+</head>
+<body>
+    <h1>下拉菜单显示对应的图片</h1>
+    <select id="imageSelect">
+        <option value="1" data-image="image1.jpg">Option 1</option>
+        <option value="2" data-image="image2.jpg">Option 2</option>
+        <option value="3" data-image="image3.jpg">Option 3</option>
+    </select>
+
+    <div id="imageContainer">
+        <img id="selectedImage" src="" alt="Selected Image">
+    </div>
+
+    <script>
+        const select = document.getElementById('imageSelect');
+        const imageContainer = document.getElementById('imageContainer');
+        const selectedImage = document.getElementById('selectedImage');
+
+        select.addEventListener('change', function() {
+            const selectedOption = select.options[select.selectedIndex];
+            const imageUrl = selectedOption.getAttribute('data-image');
+            selectedImage.src = imageUrl;
+        });
+    </script>
+</body>
+</html>
