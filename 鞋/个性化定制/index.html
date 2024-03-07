@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="文件/car.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <form>
+        <p>请想象一下，您正处于购买篮球鞋的情况。耐克高帮篮球鞋的18种配置如下图所示，请选择喜欢的鞋子样式并提交。  
+        </p>
+        <!--<img src="图片/A31.jpg" class="img_zero"/><br/>-->
+        耐克钩颜色：<br/>
+        <img src="图片/白.png" class="img_one"/>
+        <input type="radio" name="a" id="one">白色<br/>
+        <img src="图片/黑.png" class="img_two"/>
+        <input type="radio" name="a" id="two">黑色<br/>
+        <img src="图片/蓝.png" class="img_three"/>
+        <input type="radio" name="a" id="three">蓝色<br/>
+        <p>选择鞋带颜色,耐克高帮篮球鞋的3种鞋带颜色如下图所示,
+            选择喜欢的鞋带颜色。
+        </p>
+        鞋带颜色：<br/>
+        <img src="图片/白.png" class="img_four"/>
+        <input type="radio" name="b" id="four">白色<br/>
+        <img src="图片/黑.png" class="img_five" />
+        <input type="radio" name="b" id="five">黑色<br/>
+        <img src="图片/蓝.png" class="img_six" />
+        <input type="radio" name="b" id="six">蓝色<br/>
+            <br>
+        <p>选择中底颜色,耐克高帮篮球鞋的2种中底颜色如下图所示,
+            选择喜欢的中底颜色。
+        </p>
+        中底颜色：<br/>
+        <img src="图片/白.png" class="img_seven"/>
+        <input type="radio" name="c" id="seven">白色<br/>
+        <img src="图片/黑.png" class="img_eight"/>
+        <input type="radio" name="c" id="eight">黑色<br/>
+    </form>
+    <br><br><br>
+    <button id="button">提交</button><br><br><br>
+    <p>您所选择的结果效果如下图所示</p>
+    <div id="imageContainer"></div>
+
+    <script>
+        var selectone = 0;
+        var selectotwo = 0;
+        var selectthree = 0;
+        var startTime;
+        var imageContainer = document.getElementById("imageContainer");
+        console.log("js");
+        window.onload = function() {
+            startTime = new Date().getTime();
+        };
+        //const one = document.getElementsByClassName('one');
+        document.getElementById("one").addEventListener("click", changeone);
+        function changeone() {
+            selectone = 1;
+        }
+
+        document.getElementById("two").addEventListener("click", changetwo);
+        function changetwo() {
+            selectone = 2;
+        }
+
+        document.getElementById("three").addEventListener("click", changethree);
+        function changethree() {
+            selectone = 3;
+        }
+
+        document.getElementById("four").addEventListener("click", changefour);
+        function changefour() {
+            selectotwo = 4;
+        }
+
+        document.getElementById("five").addEventListener("click", changefive);
+        function changefive() {
+            selectotwo = 5;
+        }
+
+        document.getElementById("six").addEventListener("click", changesix);
+        function changesix() {
+            selectotwo = 6;
+        }
+
+        document.getElementById("seven").addEventListener("click", changeseven);
+        function changeseven() {
+            selectthree = 7;
+        }
+
+        document.getElementById("eight").addEventListener("click", changeeight);
+        function changeeight() {
+            selectthree = 8;
+        }
+        
+        document.getElementById("button").addEventListener("click",function() {
+            var currentTime = new Date().getTime();
+            var elapsedTime = currentTime - startTime;
+
+            if (elapsedTime < 5000) {
+                alert("您在3秒内按下了按钮！");
+            } else {
+                result();
+            }
+        });
+
+        function result() {
+            //imageContainer.innerHTML = '<img src="图片/效果/1单白.png" alt="图片1">';
+            if (selectone == 1 && selectotwo == 4 && selectthree == 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You.webp" style="width: 400px; height: 400px;" >';
+            } else if (selectone === 1 && selectotwo === 4 && selectthree === 8) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (1).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 1 && selectotwo === 5 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (2).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 1 && selectotwo === 5 && selectthree === 8) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (3).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 1 && selectotwo === 6 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (4).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 1 && selectotwo === 6 && selectthree === 8) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (5).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone == 2 && selectotwo == 4 && selectthree == 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (6).webp" style="width: 400px; height: 400px;" >';
+            } else if (selectone === 2 && selectotwo === 4 && selectthree === 8) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (7).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 2 && selectotwo === 5 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (8).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 2 && selectotwo === 5 && selectthree === 8) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (9).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 2 && selectotwo === 6 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (10).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 2 && selectotwo === 6 && selectthree === 8) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (11).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone == 3 && selectotwo == 4 && selectthree == 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (12).webp" style="width: 400px; height: 400px;" >';
+            } else if (selectone === 3 && selectotwo === 4 && selectthree === 8) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (13).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 3 && selectotwo === 5 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (14).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 3 && selectotwo === 5 && selectthree === 8) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (15).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 3 && selectotwo === 6 && selectthree === 7) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (16).webp" style="width: 400px; height: 400px;">';
+            } else if (selectone === 3 && selectotwo === 6 && selectthree === 8) {
+                imageContainer.innerHTML = '<img src="图片/效果/Nike-By-You (17).webp" style="width: 400px; height: 400px;">';
+            }
+        }
+        /*
+        addEventListener('click', updateSelection);
+        function updateSelection() {
+            selectone++;
+            console.log(selectone);
+            console.log("成功");
+        }
+        
+        function showImage() {
+            console.log("js");
+            var selectElement1 = document.getElementsByName("one");
+            var selectElement1 = document.getElementsByName("two");
+            var selectElement1 = document.getElementsByName("three");
+            var selectElement1 = document.getElementsByName("four");
+            var selectElement1 = document.getElementsByName("five");
+            var selectElement1 = document.getElementsByName("six");
+            var selectElement1 = document.getElementsByName("seven");
+            var imageContainer = document.getElementById("imageContainer");
+            var sum;
+            document.getElementsByClassName("one").onclick = function () {
+                console.log("码仙");
+            };
+            
+            if (selectedOption1 === "option1" && selectedOption2 === "optionA") {
+                imageContainer.innerHTML = '<img src="image1.jpg" alt="图片1">';
+            } else if (selectedOption1 === "option1" && selectedOption2 === "optionB") {
+                imageContainer.innerHTML = '<img src="image2.jpg" alt="图片2">';
+            } else if (selectedOption1 === "option1" && selectedOption2 === "optionC") {
+                imageContainer.innerHTML = '<img src="image3.jpg" alt="图片3">';
+            } else if (selectedOption1 === "option2" && selectedOption2 === "optionA") {
+                imageContainer.innerHTML = '<img src="image4.jpg" alt="图片4">';
+            } else if (selectedOption1 === "option2" && selectedOption2 === "optionB") {
+                imageContainer.innerHTML = '<img src="image5.jpg" alt="图片5">';
+            } else if (selectedOption1 === "option2" && selectedOption2 === "optionC") {
+                imageContainer.innerHTML = '<img src="image6.jpg" alt="图片6">';
+            }
+        }*/
+    </script>
+</body>
+</html>
