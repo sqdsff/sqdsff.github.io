@@ -1,0 +1,14 @@
+img {
+    width: 100%; /* 设置图片宽度为父元素宽度的50% */
+    height: 50%;
+}
+a {
+    position:absolute;
+    left: 1200px;
+    top: 100px;
+}
+
+video {
+    width: 1000px;
+    height: 1000px;
+}
