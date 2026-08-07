@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>假聊天界面</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .phone {
+      width: 375px;
+      height: 667px;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      overflow: hidden;
+      background-image: url('image1.png');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .screen {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+    }
+    .chat-image {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+    }
+    .bottom-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      outline: none;
+      border-radius: 999px;
+      font-size: 16px;
+      background: rgba(255,255,255,0.9);
+      margin-top: 12px;
+    }
+    .chat-block {
+      position: relative;
+      padding: 16px;
+    }
+    .chat-block img {
+      width: 100%;
+      display: block;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+      <div class="chat-block">
+        <img src="image2.png" alt="聊天内容" class="chat-image">
+        <img id="popup" src="image3.png" alt="弹出内容" class="chat-image" style="display: none; cursor: pointer;">
+        <img id="after-click" src="image5.png" alt="点击后内容" class="chat-image" style="display: none;">
+        <input id="textInput" class="bottom-input" type="text" placeholder="请输入消息..." readonly>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      var popup = document.getElementById('popup');
+      var afterClick = document.getElementById('after-click');
+
+      setTimeout(function() {
+        popup.style.display = 'block';
+      }, 5000);
+
+      popup.addEventListener('click', function() {
+        popup.src = 'image4.png';
+        afterClick.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>
