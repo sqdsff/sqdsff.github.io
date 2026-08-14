@@ -107,7 +107,7 @@
       <img src="image10.png" alt="footer" />
     </div>
   </div>
-  
+  <button onclick="closeWin()">关闭网页</button>
 
   <script>
     // 图片2..9 放入数组 a，初始隐藏，2秒顺序显示
@@ -123,31 +123,10 @@
         idx++;
       }, 1000);
     })();
-        function getUrlParam(name) {
-             const params = new URLSearchParams(window.location.search);
-             return params.get(name);
-         }
-         const backUrl = getUrlParam("backUrl");
-         let leftTime = 20;
-         const domCount = document.getElementById("countdown");
-         // 倒计时刷新显示
-         const timerShow = setInterval(()=>{
-             leftTime--;
-             domCount.innerText = leftTime;
-             if(leftTime <= 0){
-                 clearInterval(timerShow);
-                 goBack();
-             }
-         },1000);
-         function goBack(){
-             if(backUrl){
-                 // 有来源A地址，跳回A
-                 window.location.href = backUrl;
-             }else{
-                 // 没有来源，浏览器历史回退
-                 history.back();
-               }
-         }
+        function closeWin(){
+  window.open('','_self');
+  window.close();
+}
   </script>
 </body>
 </html>
