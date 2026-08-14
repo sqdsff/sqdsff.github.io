@@ -107,7 +107,7 @@
       <img src="image10.png" alt="footer" />
     </div>
   </div>
-  <button id="backBtn">点击返回原来的A页面</button>
+  
 
   <script>
     // 图片2..9 放入数组 a，初始隐藏，2秒顺序显示
@@ -123,26 +123,31 @@
         idx++;
       }, 1000);
     })();
-            // 获取url参数 backUrl
         function getUrlParam(name) {
-            const params = new URLSearchParams(window.location.search);
-            return params.get(name);
-        }
-
-        // 获取传过来的A页面地址
-        const backUrl = getUrlParam("backUrl");
-        const btn = document.getElementById("backBtn");
-
-        if(backUrl){
-            btn.onclick = function(){
-                window.location.href = backUrl;
-            }
-        }else{
-            // 如果没有来源地址，做兜底，比如返回上一页
-            btn.onclick = function(){
-                history.back();
-            }
-        }
+             const params = new URLSearchParams(window.location.search);
+             return params.get(name);
+         }
+         const backUrl = getUrlParam("backUrl");
+         let leftTime = 20;
+         const domCount = document.getElementById("countdown");
+         // 倒计时刷新显示
+         const timerShow = setInterval(()=>{
+             leftTime--;
+             domCount.innerText = leftTime;
+             if(leftTime <= 0){
+                 clearInterval(timerShow);
+                 goBack();
+             }
+         },1000);
+         function goBack(){
+             if(backUrl){
+                 // 有来源A地址，跳回A
+                 window.location.href = backUrl;
+             }else{
+                 // 没有来源，浏览器历史回退
+                 history.back();
+               }
+         }
   </script>
 </body>
 </html>
