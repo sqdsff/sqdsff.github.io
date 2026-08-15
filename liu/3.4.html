@@ -39,9 +39,9 @@ button{border:0;border-radius:12px;padding:12px 18px;font-weight:700;font-size:1
     <div class="chathead"><div class="avatar">M</div><div><b>MIA｜你的AI定制伙伴</b><div class="sub">与你一起完成个性化设计</div></div></div>
     <div id="chatbody" class="chatbody"></div>
   </div>
-  <div id="doneBox" class="done" style="display:none">你已完成本轮AI伙伴辅助定制体验。请返回问卷并点击“下一页”继续作答。</div>
+  <button id="doneBox" class="done" style="display:none" onclick="closeWin()">你已完成本轮AI伙伴辅助定制体验。请返回问卷并点击下方的“关闭网站”继续作答。</button>
 </section>
-</div><button onclick="closeWin()">关闭网页</button></div>
+</div></div>
 <script>
 const data={chat:{}};
 function show(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'})}
