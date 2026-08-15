@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI定制伙伴互动页</title>
+<style>
+:root{--p:#2563eb;--bg:#f5f7fb;--line:#e5e7eb;--muted:#6b7280}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:#1f2937}
+.wrap{max-width:900px;margin:auto;padding:28px 18px 56px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 40px rgba(15,23,42,.08);padding:30px}.page{display:none}.page.on{display:block}
+h2{font-size:24px;margin:0 0 12px}p{line-height:1.8;color:#374151}.muted{color:var(--muted)}
+.product{display:grid;grid-template-columns:280px 1fr;gap:28px;align-items:center;margin-top:16px}.mugbox{height:240px;border-radius:18px;background:linear-gradient(145deg,#f8fafc,#eef2f7);display:grid;place-items:center;border:1px solid var(--line)}
+.mug{width:150px;height:145px;border-radius:14px 14px 28px 28px;background:#fff;border:2px solid #d8dee8;position:relative;box-shadow:0 16px 28px rgba(15,23,42,.12)}.mug:after{content:"";position:absolute;right:-50px;top:31px;width:58px;height:66px;border:14px solid #d8dee8;border-left:0;border-radius:0 36px 36px 0}.mug span{position:absolute;top:58px;left:0;right:0;text-align:center;color:#718096;font-weight:800;letter-spacing:1px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chips b{font-size:13px;padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:#fff}
+button{border:0;border-radius:12px;padding:12px 18px;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit}.primary{background:var(--p);color:#fff}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.chat{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:18px;background:#fff}.chathead{padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);background:#fbfdff}.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;display:grid;place-items:center;font-weight:800}.sub{font-size:12px;color:var(--muted);margin-top:2px}.chatbody{min-height:380px;max-height:520px;overflow:auto;padding:18px;background:#fcfdff}
+.msg{display:flex;margin:10px 0}.msg.ai{justify-content:flex-start}.msg.user{justify-content:flex-end}.bubble{max-width:78%;padding:12px 14px;border-radius:16px;line-height:1.65;font-size:14px}.ai .bubble{background:#eef4ff;border-top-left-radius:5px}.user .bubble{background:#f3f4f6;border-top-right-radius:5px}.choices{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}.choices button{background:#fff;border:1px solid #cfd8e6;color:#334155;padding:9px 12px}.done{margin-top:18px;padding:16px 18px;border-radius:14px;background:#f8fafc;border:1px solid var(--line);line-height:1.7}
+@media(max-width:700px){.card{padding:22px 16px}.product{grid-template-columns:1fr}.bubble{max-width:90%}}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+<section class="page on" id="productPage">
+  <h2>个性化陶瓷马克杯</h2>
+  <div class="product">
+    <div class="mugbox"><div class="mug"><span>FOR YOU</span></div></div>
+    <div>
+      <p>为TA设计一款专属马克杯。</p >
+      <div class="chips"><b>杯身文字</b><b>文字字体</b><b>杯身图案</b></div>
+      <p class="muted">平台提供AI定制伙伴，可与你共同完成初步设计。</p >
+      <div class="row"><button class="primary" onclick="startChat()">邀请AI定制伙伴一起设计</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="chatPage">
+  <h2>AI伙伴辅助定制</h2>
+  <div class="chat">
+    <div class="chathead"><div class="avatar">M</div><div><b>MIA｜你的AI定制伙伴</b><div class="sub">与你一起完成个性化设计</div></div></div>
+    <div id="chatbody" class="chatbody"></div>
+  </div>
+  <div id="doneBox" class="done" style="display:none">你已完成本轮AI伙伴辅助定制体验。请返回问卷并点击“下一页”继续作答。</div>
+</section>
+</div></div>
+<script>
+const data={chat:{}};
+function show(id){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));document.getElementById(id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'})}
+function addMsg(type,html){const row=document.createElement('div');row.className='msg '+type;row.innerHTML='<div class="bubble">'+html+'</div>';chatbody.appendChild(row);chatbody.scrollTop=chatbody.scrollHeight}
+function ask(key,options,next){const wrap=document.createElement('div');wrap.className='choices';options.forEach(opt=>{const b=document.createElement('button');b.textContent=opt;b.onclick=()=>{data.chat[key]=opt;addMsg('user',opt);wrap.remove();setTimeout(next,250)};wrap.appendChild(b)});chatbody.appendChild(wrap);chatbody.scrollTop=chatbody.scrollHeight}
+function startChat(){show('chatPage');chatbody.innerHTML='';addMsg('ai','你好，我是MIA，是你的 <strong>AI定制伙伴</strong>。接下来，我们可以一起完成这份礼物的设计。');setTimeout(()=>{addMsg('ai','根据目前了解到的信息，TA喜欢简洁的设计风格，也有使用马克杯的习惯。<br><br><strong>我们先一起看看杯身文字。</strong>你更倾向于哪一种？');ask('text',['姓名首字母','简短祝福语','暂时还没想好'],step2)},450)}
+function step2(){addMsg('ai','好的，我了解了。<br><br><strong>接下来我们再一起看看字体风格。</strong>你更喜欢哪一种？');ask('font',['简约字体','手写字体','经典字体'],step3)}
+function step3(){addMsg('ai','很好。最后，我们一起确定一下杯身图案。你更倾向于：');ask('pattern',['极简线条','几何图案','简约插画'],finishChat)}
+function finishChat(){addMsg('ai','好的。结合TA的偏好和你刚才的选择，我已经整理出一个初步方向：<br><br><strong>'+data.chat.text+' + '+data.chat.font+' + '+data.chat.pattern+'</strong><br><br>接下来，<strong>我们可以继续一起完善图案和最终设计。</strong>');doneBox.style.display='block'}
+</script>
+</body>
+</html>
