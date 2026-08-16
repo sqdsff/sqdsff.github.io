@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NOVA Fit｜功能导向型定制 × 高唤醒</title>
+
+<style>
+:root{
+  --bg:#f5f7fb; --card:#fff; --text:#172033; --muted:#737d8e; --line:#e6eaf0;
+  --brand:#315efb; --brand2:#214be5; --brand-soft:#eef3ff; --ai:#f1f4f8;
+  --success:#12966b; --shadow:0 14px 40px rgba(28,39,60,.08)
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  color:var(--text);background:linear-gradient(180deg,#f9fbff 0%,#f3f6fb 100%)
+}
+button{font:inherit}
+.topbar{
+  height:64px;background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;backdrop-filter:blur(10px)
+}
+.topbar-inner{width:min(1180px,calc(100% - 36px));margin:auto;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:36px;height:36px;border-radius:11px;background:var(--brand);display:grid;place-items:center;color:#fff;font-weight:800}
+.brand strong{font-size:15px}.brand small{display:block;color:var(--muted);margin-top:2px}
+.status{font-size:12px;color:#176b50;background:#eefaf5;border:1px solid #d4eee3;padding:7px 10px;border-radius:999px}
+.shell{width:min(1180px,calc(100% - 36px));margin:26px auto 48px}
+.progress{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:18px;box-shadow:0 5px 16px rgba(25,40,65,.04)}
+.progress span{font-size:13px;color:#3c4658;white-space:nowrap}
+.track{height:7px;background:#edf1f6;border-radius:999px;flex:1;overflow:hidden}
+.fill{height:100%;width:8%;background:var(--brand);transition:.35s ease}
+.layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:20px;align-items:start}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.product{padding:24px}
+.kicker{font-size:12px;font-weight:800;color:var(--brand);letter-spacing:.08em}
+h1{font-size:27px;margin:7px 0 4px}.sub{font-size:14px;color:var(--muted)}.price{font-size:24px;font-weight:800;margin-top:14px}
+.visual{margin:20px 0;height:200px;border-radius:17px;background:radial-gradient(circle at 50% 10%,#fff,#f6f8fc 48%,#e9eef6);border:1px solid #edf0f4;display:grid;place-items:center}
+.watch{position:relative;width:130px;height:164px}.strap{position:absolute;left:44px;width:42px;background:#202531;border-radius:18px}.strap.top{height:64px;top:-30px}.strap.bottom{height:70px;bottom:-38px}
+.face{position:absolute;left:18px;top:22px;width:94px;height:116px;border-radius:25px;background:#111827;border:7px solid #cbd5e1;color:#fff;display:grid;place-items:center;box-shadow:0 9px 26px rgba(20,28,40,.22)}
+.face-inner{text-align:center}.time{font-size:24px;font-weight:800}.steps{font-size:10px;opacity:.72;margin-top:5px}
+.task{background:var(--brand-soft);border:1px solid #dce5ff;border-radius:13px;padding:14px;font-size:13px;line-height:1.75;margin-bottom:18px}
+.selection-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:2px 0 11px}
+.selection-title strong{font-size:15px}.selection-title span{font-size:11px;color:var(--muted)}
+.selector{border:1px solid var(--line);border-radius:13px;padding:12px 12px 10px;margin-bottom:10px}
+.selector-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.selector-head b{font-size:13px}.selected-text{font-size:11px;color:var(--brand);font-weight:700}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{border:1px solid #d7dde8;background:#fff;color:#3d4657;border-radius:999px;padding:7px 10px;font-size:12px;cursor:pointer;transition:.15s}
+.chip:hover{border-color:#9fb0e9;background:#f8faff}
+.chip.active{background:var(--brand-soft);border-color:var(--brand);color:#2349c5;font-weight:800}
+.start{width:100%;border:0;border-radius:12px;background:var(--brand);color:#fff;padding:12px 14px;font-weight:800;cursor:pointer;margin-top:6px;box-shadow:0 7px 18px rgba(49,94,251,.18)}
+.start:disabled{opacity:.38;cursor:not-allowed;box-shadow:none}
+.chat{height:735px;display:flex;flex-direction:column;overflow:hidden;position:sticky;top:82px}
+.chat-head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:11px}
+.avatar{width:39px;height:39px;border-radius:50%;background:#111827;color:#fff;display:grid;place-items:center;font-weight:800}
+.chat-name{font-weight:800;font-size:14px}.online{font-size:12px;color:#139267;margin-top:2px}.hint{margin-left:auto;font-size:11px;color:var(--muted)}
+.chat-body{flex:1;background:#fbfcfe;padding:18px;overflow:auto}
+.message{display:flex;margin:11px 0;animation:fade .22s ease}.user{justify-content:flex-end}.ai{justify-content:flex-start}
+.bubble{max-width:84%;padding:11px 13px;border-radius:14px;font-size:13px;line-height:1.74;white-space:pre-line}
+.user .bubble{background:var(--brand);color:#fff;border-top-right-radius:4px}
+.ai .bubble{background:var(--ai);color:#253147;border-top-left-radius:4px}
+.typing{width:56px;background:var(--ai);border-radius:14px;border-top-left-radius:4px;padding:12px 14px;display:flex;gap:5px}
+.dot{width:6px;height:6px;background:#9ba4b3;border-radius:50%;animation:bounce 1s infinite}.dot:nth-child(2){animation-delay:.16s}.dot:nth-child(3){animation-delay:.32s}
+.composer{border-top:1px solid var(--line);background:#fff;padding:12px 14px}
+.composer-note{font-size:11px;color:var(--muted);margin-bottom:7px}
+.send-btn{width:100%;border:0;background:var(--brand);color:#fff;border-radius:12px;padding:11px 13px;cursor:pointer;font-weight:700;line-height:1.5;text-align:left;transition:.15s}
+.send-btn:hover{background:var(--brand2);transform:translateY(-1px)}
+.send-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.waiting{font-size:12px;color:var(--muted);padding:6px 2px}
+.done{font-size:12px;color:#176b50;background:#eefaf5;border:1px solid #d4eee3;border-radius:11px;padding:10px 12px;line-height:1.6}
+.chat-foot{border-top:1px solid var(--line);padding:10px 14px;background:#fff;color:var(--muted);font-size:11px}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.chat{position:static;height:690px}.shell{width:min(100% - 20px,1180px)}.status{display:none}}
+</style>
+
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="logo">N</div>
+      <div><strong>NOVA Fit</strong><small>AI辅助个性化定制</small></div>
+    </div>
+    <div class="status">AI客服在线</div>
+  </div>
+</div>
+
+<main class="shell">
+  <div class="progress">
+    <span id="progressText">请先完成你的定制选择</span>
+    <div class="track"><div class="fill" id="fill"></div></div>
+  </div>
+
+  <div class="layout">
+    <section class="card product">
+      <div class="kicker">NOVA FIT</div>
+      <h1>智能运动手环</h1>
+      <div class="sub">轻量佩戴 · 日常健康与运动记录</div>
+      <div class="price">¥399</div>
+
+      <div class="visual">
+        <div class="watch">
+          <div class="strap top"></div>
+          <div class="face"><div class="face-inner"><div class="time">10:28</div><div class="steps">8,426 steps</div></div></div>
+          <div class="strap bottom"></div>
+        </div>
+      </div>
+
+      <div class="task">
+        你希望通过这次定制，让手环在日常佩戴和运动使用中更加符合自己的实际需要，重点关注舒适性、稳定性和使用效率。请先根据自己的需求完成下面的配置，然后获取 NOVA AI 的建议。
+      </div>
+
+      <div class="selection-title">
+        <strong>请选择你的定制方案</strong>
+        <span>每项选择 1 个</span>
+      </div>
+
+      <div class="selector" data-key="size">
+        <div class="selector-head"><b>表带尺寸</b><span class="selected-text">尚未选择</span></div>
+        <div class="chips">
+          <button class="chip" data-value="S">S</button>
+          <button class="chip" data-value="M">M</button>
+          <button class="chip" data-value="L">L</button>
+        </div>
+      </div>
+
+      <div class="selector" data-key="material">
+        <div class="selector-head"><b>表带材质</b><span class="selected-text">尚未选择</span></div>
+        <div class="chips">
+          <button class="chip" data-value="硅胶">硅胶</button>
+          <button class="chip" data-value="尼龙">尼龙</button>
+          <button class="chip" data-value="氟橡胶">氟橡胶</button>
+        </div>
+      </div>
+
+      <div class="selector" data-key="clasp">
+        <div class="selector-head"><b>表扣结构</b><span class="selected-text">尚未选择</span></div>
+        <div class="chips">
+          <button class="chip" data-value="针扣">针扣</button>
+          <button class="chip" data-value="磁吸">磁吸</button>
+          <button class="chip" data-value="卡扣">卡扣</button>
+        </div>
+      </div>
+
+      <div class="selector" data-key="display">
+        <div class="selector-head"><b>显示模式</b><span class="selected-text">尚未选择</span></div>
+        <div class="chips">
+          <button class="chip" data-value="日常">日常</button>
+          <button class="chip" data-value="运动">运动</button>
+          <button class="chip" data-value="综合">综合</button>
+        </div>
+      </div>
+
+      <button class="start" id="startBtn" disabled>完成以上选择后获取 AI 建议</button>
+    </section>
+
+    <section class="card chat">
+      <div class="chat-head">
+        <div class="avatar">AI</div>
+        <div><div class="chat-name">NOVA AI</div><div class="online">● 在线</div></div>
+        <div class="hint">点击下方蓝色回复即可发送</div>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <div class="message ai">
+          <div class="bubble">你好！请先在左侧完成你的定制选择。完成后，我会进一步了解你的实际使用需求，并给出更适合你的配置建议！</div>
+        </div>
+      </div>
+
+      <div class="composer" id="composer">
+        <div class="waiting">完成左侧 4 项选择后，即可开始与 NOVA AI 互动。</div>
+      </div>
+
+      <div class="chat-foot">提示：每次只需点击下方蓝色回复，AI 将自动继续回应。</div>
+    </section>
+  </div>
+</main>
+
+<script>
+const selections={size:null,material:null,clasp:null,display:null};
+let current=0, started=false;
+const chatBody=document.getElementById('chatBody');
+const composer=document.getElementById('composer');
+const startBtn=document.getElementById('startBtn');
+
+document.querySelectorAll('.selector').forEach(box=>{
+  const key=box.dataset.key;
+  box.querySelectorAll('.chip').forEach(chip=>{
+    chip.onclick=()=>{
+      if(started) return;
+      box.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+      chip.classList.add('active');
+      selections[key]=chip.dataset.value;
+      box.querySelector('.selected-text').textContent='已选：'+chip.dataset.value;
+      updateReady();
+    };
+  });
+});
+
+function updateReady(){
+  const ready=Object.values(selections).every(Boolean);
+  startBtn.disabled=!ready;
+  startBtn.textContent=ready?'获取 NOVA AI 配置建议':'完成以上选择后获取 AI 建议';
+  document.getElementById('fill').style.width=ready?'18%':'8%';
+  document.getElementById('progressText').textContent=ready?'定制方案已选好，可以开始 AI 咨询':'请先完成你的定制选择';
+}
+
+function addMessage(role,text){
+  const row=document.createElement('div');
+  row.className='message '+role;
+  const bubble=document.createElement('div');
+  bubble.className='bubble';
+  bubble.textContent=text;
+  row.appendChild(bubble);
+  chatBody.appendChild(row);
+  chatBody.scrollTop=chatBody.scrollHeight;
+}
+
+function showTyping(cb){
+  const row=document.createElement('div');
+  row.className='message ai';
+  row.innerHTML='<div class="typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+  chatBody.appendChild(row);
+  chatBody.scrollTop=chatBody.scrollHeight;
+  setTimeout(()=>{row.remove();cb();},850);
+}
+
+function buildRounds(){
+  const s=selections.size, m=selections.material, c=selections.clasp, d=selections.display;
+  return [
+    {
+      user:`我平时会长时间佩戴，也会用它记录运动。我希望舒适性和稳定性都能兼顾，你觉得我现在的配置合适吗？`,
+      ai:`当然可以！✨ 这个方向很适合你的使用需求！你现在选择的${s}尺寸、${m}材质、${c}表扣和${d}显示模式，已经比较好地兼顾了日常佩戴和运动使用。接下来只要再确认舒适性与稳定性的细节，就能把配置调整得更合适！`
+    },
+    {
+      user:`我比较在意长时间佩戴的舒适性。${m}材质适合一直戴着吗？`,
+      ai:`如果你希望长时间佩戴更舒服，我很推荐保留${m}材质！🌟 它在透气性、柔软度和持续佩戴体验上都比较有优势，可以减少闷热和束缚感，让日常佩戴更轻松！`
+    },
+    {
+      user:`运动的时候我也比较担心手环松动。${c}表扣和${s}尺寸能保证稳定吗？`,
+      ai:`运动稳定性也很重要！👍 你现在选择的${c}表扣能够提高固定程度，减少运动过程中手环来回移动的情况。搭配${s}尺寸后，整体会更贴合，也更适合跑步、健身等运动场景！`
+    },
+    {
+      user:`我还选了${d}显示模式，平时查看数据方便吗？`,
+      ai:`这个选择很实用！😊 ${d}显示模式可以让常用数据更集中地呈现，查看心率、步数或运动信息时会更方便。这样既不会增加额外操作，也能让日常使用效率更高！`
+    },
+    {
+      user:`那综合我现在这些选择，你觉得最终配置怎么样？`,
+      ai:`综合来看，这套配置很不错！🎉 我很推荐你现在的“${s}尺寸＋${m}材质＋${c}表扣＋${d}显示模式”组合！它能够同时兼顾长时间佩戴的舒适性、运动过程中的稳定性和信息查看效率，我觉得和你的实际使用需求非常匹配！`
+    }
+  ];
+}
+
+function renderSendButton(){
+  const rounds=buildRounds();
+  if(current>=rounds.length){
+    composer.innerHTML='<button class="done" onclick="closeWin()">定制咨询已完成，请点击关闭网页。</button>';
+    document.getElementById('fill').style.width='100%';
+    document.getElementById('progressText').textContent='AI定制咨询完成';
+    return;
+  }
+  composer.innerHTML='';
+  const note=document.createElement('div');
+  note.className='composer-note';
+  note.textContent='点击下面的回复即可发送：';
+  const btn=document.createElement('button');
+  btn.className='send-btn';
+  btn.textContent=rounds[current].user;
+  btn.onclick=()=>{
+    btn.disabled=true;
+    addMessage('user',rounds[current].user);
+    composer.innerHTML='<div class="waiting">NOVA AI 正在回复…</div>';
+    showTyping(()=>{
+      addMessage('ai',rounds[current].ai);
+      current++;
+      const pct=18+current*16.4;
+      document.getElementById('fill').style.width=Math.min(pct,100)+'%';
+      renderSendButton();
+    });
+  };
+  composer.appendChild(note);
+  composer.appendChild(btn);
+}
+
+function closeWin(){
+  window.open('','_self');
+  window.close();
+}
+
+startBtn.onclick=()=>{
+  if(started) return;
+  started=true;
+  document.querySelectorAll('.chip').forEach(x=>x.disabled=true);
+  startBtn.disabled=true;
+  startBtn.textContent='已进入 AI 定制咨询';
+  composer.innerHTML='<div class="waiting">NOVA AI 正在读取你的定制选择…</div>';
+  showTyping(()=>{
+    addMessage('ai','你好！我已经看到你当前的定制选择了。接下来，我会进一步了解你的实际使用需求，并给出更适合你的配置建议！');
+    document.getElementById('progressText').textContent='AI正在根据你的方案提供建议';
+    renderSendButton();
+  });
+};
+</script>
+</body>
+</html>
