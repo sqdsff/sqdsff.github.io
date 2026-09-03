@@ -285,8 +285,7 @@ function renderSendButton(){
   composer.appendChild(btn);
 }
 function closeWin(){
-  window.open('','_self');
-  window.close();
+  history.back();
 }
 startBtn.onclick=()=>{
   if(started) return;
