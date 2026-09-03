@@ -286,8 +286,7 @@ function renderSendButton(){
 }
 
 function closeWin(){
-  window.open('','_self');
-  window.close();
+  history.back();
 }
 
 startBtn.onclick=()=>{
