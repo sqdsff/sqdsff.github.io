@@ -52,20 +52,6 @@ function step2(){addMsg('ai','好的，我了解了。<br><br><strong>接下来�
 function step3(){addMsg('ai','很好。最后，我们一起确定一下杯身图案。你更倾向于：');ask('pattern',['极简线条','几何图案','简约插画'],finishChat)}
 function finishChat(){addMsg('ai','好的。结合TA的偏好和你刚才的选择，我已经整理出一个初步方向：<br><br><strong>'+data.chat.text+' + '+data.chat.font+' + '+data.chat.pattern+'</strong><br><br>接下来，<strong>我们可以继续一起完善图案和最终设计。</strong>');doneBox.style.display='block'}
 function closeWin(){
-  const isWechat=/MicroMessenger/i.test(navigator.userAgent);
-  if(isWechat){
-    const closeWechatWindow=()=>{
-      if(window.WeixinJSBridge&&typeof window.WeixinJSBridge.call==='function'){
-        window.WeixinJSBridge.call('closeWindow');
-      }
-    };
-    if(window.WeixinJSBridge){
-      closeWechatWindow();
-    }else{
-      document.addEventListener('WeixinJSBridgeReady',closeWechatWindow,{once:true});
-    }
-    return;
-  }
   window.close();
 }
 </script>
